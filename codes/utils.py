@@ -1,10 +1,7 @@
 import numpy as np
-import pandas as pd
-import numpy.typing as npt
 from sklearn.preprocessing import StandardScaler
 
 from tscluster.preprocessing.utils import ntf_to_tnf
-
 
 def scale_per_entity(X):
     ar = []
@@ -158,22 +155,4 @@ def gen_synthetic_data(K=3, T=20, N=60, F=3, n_lags=2, target_noise_sigma=0.2,
     return ts_arr
 
 if __name__ == "__main__":
-    T = 20
-    N = 60
-    F = 3
-
-    K = 3
-    entities_per_cluster = N // K
-
-    true_set = {0: (0, 1), 1: (0,), 2: (2,)}
-
-    feature_noise_sigma = 1
-    target_noise_sigma = 0.2
-    n_lags = 2
-    random_state = 0
-
-    ts_arr = gen_synthetic_data(T=T, N=N, F=F, K=K, entities_per_cluster=entities_per_cluster,
-                                target_noise_sigma=target_noise_sigma, feature_noise_sigma=feature_noise_sigma,
-                                n_lags=n_lags, true_set=true_set, random_state=random_state)
-
-    print(pd.DataFrame(ts_arr[:, :, -1]).describe())
+    pass

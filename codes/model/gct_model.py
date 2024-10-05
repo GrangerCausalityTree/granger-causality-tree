@@ -295,3 +295,6 @@ class GrangeCausalTree():
     @property
     def n_trained_models_(self):
         return self.__n_trained_models
+
+if __name__ == "__main__":
+    pass

@@ -16,3 +16,5 @@ def calculate_purity(y_true, y_pred):
 def par_set_accuracy(true_set, pred_set, true_labels, pred_labels):
     return np.sum([true_set[true_labels[i]] == pred_set[pred_labels[i]] for i in range(len(true_labels))]) / len(true_labels)
 
+if __name__ == "__main__":
+    pass

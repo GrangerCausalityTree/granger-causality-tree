@@ -244,3 +244,6 @@ class AggLR(Base_PTSC):
         self._labels, self._imp_features = labels, theta_us
 
         return self
+
+if __name__ == "__main__":
+    pass
