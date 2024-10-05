@@ -58,23 +58,25 @@ class GrangeCausalTree():
                     
                     log_likelihoods_u[i, m] = n * np.log(rss_u) 
 
-            if which in ('both', 'restricted'):
-                X_r = self.create_design_data_GC(X, x_col_idx=[-1])
+            # if which in ('both', 'restricted'):
+            X_r = self.create_design_data_GC(X, x_col_idx=[-1])
 
-                b_r = np.matmul(np.linalg.inv(np.matmul(X_r.T, X_r) + self.lambda_reg * np.identity(X_r.shape[1])), 
-                                np.matmul(X_r.T, y))
+            b_r = np.matmul(np.linalg.inv(np.matmul(X_r.T, X_r) + self.lambda_reg * np.identity(X_r.shape[1])), 
+                            np.matmul(X_r.T, y))
 
-                rss_r = np.sum((y - np.matmul(X_r, b_r))**2) + self.lambda_reg * np.linalg.norm(b_r.flatten())**2
-                
-                log_likelihoods_r[i] = n * np.log(rss_r) 
-        
+            rss_r = np.sum((y - np.matmul(X_r, b_r))**2) + self.lambda_reg * np.linalg.norm(b_r.flatten())**2
+            
+            log_likelihoods_r[i] = n * np.log(rss_r) 
+
         if which == 'unrestricted':
             if return_thetas and len(feature_set) == 1 and ts_arr.shape[1] == 1:
-                return log_likelihoods_u, b_u.flatten()
+                return log_likelihoods_r[0] - log_likelihoods_u[0], b_u.flatten()
 
             return log_likelihoods_u
+    
         elif which == 'restricted':
             return log_likelihoods_r 
+        
         return log_likelihoods_u, log_likelihoods_r
         
     def build_tree(self, i, arr, log_likelihoods_r, feature_set_dict, nodes, nodes_to_skip=[], verbose=False):
